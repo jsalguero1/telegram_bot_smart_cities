@@ -7,12 +7,19 @@ ASK_PHOTO, ASK_LOCATION = range(2)
 class Form_controllers:
     
     @staticmethod
-    async def form_button(update:Update, context:CallbackContext):
-        data = update.callback_query.data
-        if (data == "/form"):
-            await update.callback_query.edit_message_text(text="Iniciar form", reply_markup=None)
-        await update.callback_query.answer()
-        print(update.callback_query.data)
+    async def start_form_button(update:Update, context:ContextTypes.DEFAULT_TYPE):
+        query = update.callback_query
+        await query.answer()
+        await update.effective_message.reply_text(f"Haz iniciado el formulario para registrar un residuo ♻️\n\n"
+                                        f"---------------\n"
+                                        f"*Comandos* 💡\n"
+                                        f"/cancel: Si en cualquier momento deseas cancelar el formulario❌\n"
+                                        f"---------------\n\n"
+                                        f"Para iniciar por favor envia una foto del residuo 📸\n"
+                                        f"(Puedes tomarla o seleccionarla de tu galeria)", 
+                                        parse_mode='markdown',reply_markup=None)
+        return ASK_PHOTO
+        
     
         
     @staticmethod
@@ -30,6 +37,7 @@ class Form_controllers:
 
     @staticmethod
     async def ask_photo(update:Update, context: ContextTypes.DEFAULT_TYPE):
+        print("mask photo activo")
         message = update.effective_message
         if message.photo:
             context.user_data["form_photo"] = message.photo[1].file_id
@@ -67,6 +75,7 @@ class Form_controllers:
     @staticmethod
     async def cancel_form(update:Update, context: ContextTypes.DEFAULT_TYPE):
          await update.message.reply_text("Se ha cancelado el formulario ❌, puedes volver a iniciar usando el comando: /form")
+         await Controllers.start(update, context)
          return ConversationHandler.END
      
     @staticmethod
