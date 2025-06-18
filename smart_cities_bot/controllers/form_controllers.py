@@ -75,6 +75,7 @@ class Form_controllers:
     @staticmethod
     async def cancel_form(update:Update, context: ContextTypes.DEFAULT_TYPE):
          await update.message.reply_text("Se ha cancelado el formulario ❌, puedes volver a iniciar usando el comando: /form")
+         await Controllers.start(update, context)
          return ConversationHandler.END
      
     @staticmethod
