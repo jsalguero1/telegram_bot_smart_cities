@@ -1,0 +1,3 @@
+class Routes:
+
+    FORM = "/form"
