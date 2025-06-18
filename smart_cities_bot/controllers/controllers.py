@@ -34,7 +34,7 @@ class Controllers:
             for residuo in residuosList:
                 caption = f"Información del registro ♻️\nLatitud: {residuo.latitude}\nLongitud: {residuo.longitude}\nFecha: {residuo.date}\nHora: {residuo.time}"
                 await update.effective_message.reply_photo(photo=residuo.file_id, caption=caption)
-                await Controllers.start(update, context)
+            await Controllers.start(update, context)
         else:
             await update.effective_message.reply_text("Actualmente no hay registros de residuos, crea uno para usar este comando")
             await Controllers.start(update, context)

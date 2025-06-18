@@ -17,7 +17,7 @@ class Form_controllers:
                                         f"---------------\n\n"
                                         f"Para iniciar por favor envia una foto del residuo 📸\n"
                                         f"(Puedes tomarla o seleccionarla de tu galeria)", 
-                                        parse_mode='markdown')
+                                        parse_mode='markdown',reply_markup=None)
         return ASK_PHOTO
         
     
