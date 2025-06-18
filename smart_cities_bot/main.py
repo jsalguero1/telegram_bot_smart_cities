@@ -14,7 +14,7 @@ app = ApplicationBuilder().token(TOKEN).build()
 # Handlers
 app.add_handler(CommandHandler("start", Controllers.start))
 app.add_handler(CommandHandler("list", Controllers.list_residuos))
-app.add_handler(CallbackQueryHandler(Form_controllers.form_button))
+#app.add_handler(CallbackQueryHandler(Form_controllers.form_button))
 app.add_handler(form_conversation_handler.conversation_handler)
 
 #polling

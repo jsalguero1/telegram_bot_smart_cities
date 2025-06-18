@@ -9,7 +9,7 @@ class Controllers:
     async def start (update:Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = InlineKeyboardMarkup([
             [InlineKeyboardButton(text="Registrar Residuo", callback_data=Routes.FORM)],
-            [InlineKeyboardButton(text="Listar residuos", callback_data="Listar residuos")],
+            [InlineKeyboardButton(text="Listar residuos", callback_data=Routes.LIST)],
             [InlineKeyboardButton(text="Visitar Smart Cities", callback_data="Smart Cities")]
         ])
         await update.message.reply_text(f"Hola! estas hablando con bot de Smart Cities Colombia 🤖🇨🇴\n"

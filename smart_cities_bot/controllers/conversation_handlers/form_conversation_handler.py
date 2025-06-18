@@ -1,10 +1,12 @@
 from telegram.ext import CommandHandler, MessageHandler,ConversationHandler, filters, CallbackQueryHandler
 from controllers.form_controllers import Form_controllers
+from routes.routes import Routes
 
 ASK_PHOTO, ASK_LOCATION = range(2)
 
 conversation_handler = ConversationHandler(
-        entry_points=[CommandHandler("form",Form_controllers.ask_message)],
+        entry_points=[CommandHandler("form",Form_controllers.ask_message),
+                      CallbackQueryHandler(Form_controllers.start_form_button, pattern=f"^{Routes.FORM}$")],
         states={
             ASK_PHOTO: [MessageHandler(filters.ALL & ~filters.COMMAND, Form_controllers.ask_photo)],
             ASK_LOCATION: [MessageHandler(filters.ALL & ~filters.COMMAND, Form_controllers.ask_location)]
@@ -12,4 +14,5 @@ conversation_handler = ConversationHandler(
         fallbacks=[
             MessageHandler(filters.COMMAND, Form_controllers.cancel_form)
         ]
+        ,per_chat=True, per_user=True
     )
